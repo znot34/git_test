@@ -25,6 +25,5 @@ jobs:
           
           # Commit with specific message
           COMMIT_MSG="Merge pull request #1743 from madup-inc/fix/DPT-2713
-
           Revert \"fix: 비디오는 1개씩 수집하도록 변경 (DPT-2713)\" - 5de1b2b89ab8b8f3c661a8e4944ce9e21099dc14"
           git commit -m "${COMMIT_MSG} - $(git rev-parse HEAD)"
