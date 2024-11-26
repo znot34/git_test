@@ -1,0 +1,44 @@
+name: Test Commit Message Error
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-commit-message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Create a file and commit with special characters
+        run: |
+          echo "Test file" > test.txt
+          git add test.txt
+          
+          # Commit with special characters and multiline message
+          COMMIT_MSG=$(echo "fix: 콤보차트에서 KPI만 float 타입으로 응답되지 않는 이슈 수정 (#2072)
+
+<!-- 좋은 PR을 만드는 방법:
+1. 무슨 이유로 코드를 변경했는지
+1. 어떤 위험이나 장애가 발견되었는지
+1. 어떤 부분에 리뷰어가 집중하면 좋을지
+1. 테스트 계획 또는 완료 사항
+-->
+
+### 🌀 Changes
+- metric_key가 KPI 인 경우 float 이 아닌 decimal 로 응답되고 있는 것을 확인
+- 따라서 prev_bar, prev_line 은 , ,  세가지 타입으로 리턴 됨
+- safe_float 함수 하나 만들어서 적용
+
+### 🔗 Links
+- - ad0a4a546b87b7135bdd5f91c062a9697fd4be5c" | sed 's/\r//g' | sed 's/\n/ /g')
+          
+          git commit -m "${COMMIT_MSG} - $(git rev-parse HEAD)"
