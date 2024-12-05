@@ -24,11 +24,13 @@ jobs:
           git add test.txt
           
           # Commit with specific message
-          COMMIT_MSG=$(printf '%s' Merge pull request #1743 from madup-inc/fix/DPT-2713
-              Revert "fix: 비디오는 1개씩 수집하도록 변경 (DPT-2713)\" - 5de1b2b89ab8b8f3c661a8e4944ce9e21099dc14" | 
-              sed 's/\r//g' |  # 캐리지 리턴 문자 제거 
+          # Commit with specific message
+          COMMIT_MSG=$(printf '%s' "Merge pull request #1743 from madup-inc/fix/DPT-2713
+          Revert \"fix: 비디오는 1개씩 수집하도록 변경 (DPT-2713)\" - 5de1b2b89ab8b8f3c661a8e4944ce9e21099dc14" |
+              sed 's/\r//g' |  # 캐리지 리턴 문자 제거
               tr '\n' ' ' |    # 개행을 공백으로 변경
-              sed 's/["`'"'"']/\\&/g' |  # 따옴표 이스케이프
-              cut -c1-250     # 커밋 메시지 길이 제한 (250자)
+              cut -c1-250      # 커밋 메시지 길이 제한 (250자)
           )
+
+          # 커밋 메시지를 안전하게 전달
           git commit -m "${COMMIT_MSG} - $(git rev-parse HEAD)"
