@@ -26,6 +26,5 @@ jobs:
           git config --global user.email "git@madup.com"
           git config --global user.name "GitOps"
           git add .
-          COMMIT_MSG='Revert "DM - [임시] NAVER_GFA API 수집 요청 시, 리소스 수집 요청 로직 제거"
-          git commit -m "${{COMMIT_MSG}} - ${{ github.sha }}"
+          git commit -m "${{ github.event.head_commit.message }} - ${{ github.sha }}"
           git push
