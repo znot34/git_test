@@ -21,8 +21,6 @@ jobs:
       - name: “Clone from Xpert argo-helm-chart and Commit to Repo“
         run: |
           git pull
-          sed '/image/s/:[^: ]*$/:${{ github.sha }}/' values.yaml > kustomize_values.yaml
-          mv kustomize_values.yaml values.yaml
           git config --global user.email "git@madup.com"
           git config --global user.name "GitOps"
           git add .
