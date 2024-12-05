@@ -21,11 +21,11 @@ jobs:
       - name: “Clone from Xpert argo-helm-chart and Commit to Repo“
         run: |
           git pull
-          cd ./${{ env.GITOPS_TARGET_ENV }}/tenant_madup/charts/${{ env.DEPLOYMENT_NAME }}/
           sed '/image/s/:[^: ]*$/:${{ github.sha }}/' values.yaml > kustomize_values.yaml
           mv kustomize_values.yaml values.yaml
           git config --global user.email "git@madup.com"
           git config --global user.name "GitOps"
           git add .
-          git commit -m "${{ github.event.head_commit.message }} - ${{ github.sha }}"
+          COMMIT_MSG='Revert "DM - [임시] NAVER_GFA API 수집 요청 시, 리소스 수집 요청 로직 제거"
+          git commit -m "${{COMMIT_MSG}} - ${{ github.sha }}"
           git push
